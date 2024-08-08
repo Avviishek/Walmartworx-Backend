@@ -40,7 +40,7 @@ app.get('/trucks', (req, res) => {
       });
     });
 app.get('/orders', (req, res) => {
-      const query = 'SELECT * FROM `TABLE 1`';  
+      const query = 'SELECT * FROM `TABLE 3`';  
       db.query(query, (err, results) => {
         if (err) {
           res.status(500).send(err);
