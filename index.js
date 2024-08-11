@@ -235,7 +235,68 @@ app.get('/assigntruck', (req, res) => {
   }
   res.json(responseData);
 });
+app.post('/addorder', (req, res) => {
+  const order = req.body;
 
+  if (!order || Object.keys(order).length === 0) {
+      return res.status(400).send('Order data is required');
+  }
+
+  // Assuming the order object has the following structure:
+  // {
+  //     "vehicle_reg_no": "XYZ123",
+  //     "driver_name": "Rajan Kumar",
+  //     "mobile_no": "8453345678",
+  //     "date_assigned": "08/08/2024",
+  //     "volume": 26.08,
+  //     "address": "Delhi"
+  // }
+
+  const query = `
+      INSERT INTO \`TABLE 3\` (\`COL 1\`, \`COL 2\`, \`COL 3\`, \`COL 4\`, \`COL 5\`, \`COL 6\`,\`COL 7\`)
+      VALUES (?, ?, ?, ?, ?, ?,?)
+  `;
+
+  // Extract the values from the order object
+  const values = [
+    order["COL 1"],
+    order["COL 2"],
+    order["COL 3"],
+    order["COL 4"],
+    order["COL 5"],
+    order["COL 6"],
+    order["COL 7"]  
+  ];
+
+  db.query(query, values, (err, result) => {
+      if (err) {
+          res.status(500).send(err);
+          return;
+      }
+      res.status(201).send('Order added successfully');
+  });
+});
+app.get('/recentorders', (req, res) => {
+  const query = `
+  SELECT * 
+  FROM \`TABLE 3\` 
+  ORDER BY 
+      CAST(SUBSTRING(\`COL 7\`, 7, 4) AS UNSIGNED) * 10000 + 
+      CAST(SUBSTRING(\`COL 7\`, 4, 2) AS UNSIGNED) * 100 + 
+      CAST(SUBSTRING(\`COL 7\`, 1, 2) AS UNSIGNED) DESC
+      LIMIT 8
+`; 
+      db.query(query, (err, results) => {
+        if (err) {
+          res.status(500).send(err);
+          return;
+        }
+        res.json(results);
+       results.forEach(result=>{
+            console.log(result) ;
+       })
+      });
+    });  
 
 app.listen(port, () => {
   console.log(`Server is running on http://localhost:${port}`);
