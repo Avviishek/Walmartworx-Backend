@@ -27,7 +27,7 @@ app.get('/', (req, res) => {
   res.send('Hello from the backend server!');
 });
 app.get('/trucks', (req, res) => {
-      const query = 'SELECT * FROM `TABLE 2`';  
+      const query = 'SELECT * FROM `TABLE 6`';  
       db.query(query, (err, results) => {
         if (err) {
           res.status(500).send(err);
@@ -144,7 +144,98 @@ app.get('/address', (req, res) => {
           console.log(result);
       });
   });
+});
+app.get('/assigned', (req, res) => {
+  const query = 'SELECT DISTINCT `COL 2` FROM `TABLE 3`'; 
+
+  db.query(query, (err, results) => {
+      if (err) {
+          res.status(500).send(err);
+          return;
+      }
+      res.json(results);
+      results.forEach(result => {
+          console.log(result);
+      });
+  });
 });  
+app.get('/assignedorder', (req, res) => {
+  const { address } = req.query;
+
+  if (!address) {
+      return res.status(400).send('Address is required');
+  }
+
+  // Determine the table to query based on the address
+  let tableName;
+  if (address.toLowerCase() === 'delhi') {
+      tableName = 'TABLE 4';
+  } else if (address.toLowerCase() === 'hyderabad') {
+      tableName = 'TABLE 5';
+  } else {
+      return res.status(400).send('Invalid address provided');
+  }
+
+  const query = `SELECT * FROM \`${tableName}\``;
+  db.query(query, (err, results) => {
+      if (err) {
+          res.status(500).send(err);
+          return;
+      }
+      res.json(results);
+      results.forEach(result => {
+          console.log(result);
+      });
+  });
+});
+app.get('/assigned', (req, res) => {
+  const query = 'SELECT DISTINCT `COL 2` FROM `TABLE 3`'; 
+
+  db.query(query, (err, results) => {
+      if (err) {
+          res.status(500).send(err);
+          return;
+      }
+      res.json(results);
+      results.forEach(result => {
+          console.log(result);
+      });
+  });
+});  
+app.get('/assigntruck', (req, res) => {
+  const { address } = req.query;
+
+  if (!address) {
+      return res.status(400).send('Address is required');
+  }
+
+  
+  let responseData;
+
+  const currentDate = new Date().toISOString().split('T')[0]; // Get the present date in yyyy-mm-dd format
+
+  if (address.toLowerCase() === 'delhi') {
+      responseData = {
+          "vehicle reg no": "DL93TO7899", 
+          "driver name": "Nishant",
+          "mobile no": "6720674334",
+          "date assigned": currentDate,
+          "volume": 26.08
+      };
+  } else if (address.toLowerCase() === 'hyderabad') {
+      responseData = {
+          "vehicle reg no": "TS36VH9939", 
+          "driver name": "Vikas",
+          "mobile no": "7240121780",
+          "date assigned": currentDate,
+          "volume": 27.65
+      };
+  } else {
+      return res.status(400).send('Invalid address provided');
+  }
+  res.json(responseData);
+});
+
 
 app.listen(port, () => {
   console.log(`Server is running on http://localhost:${port}`);
