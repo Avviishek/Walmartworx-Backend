@@ -207,28 +207,24 @@ app.get('/assignedorder', (req, res) => {
   } else {
     query = 'SELECT * FROM `TABLE 3` WHERE `COL 2` = ?'
   }
-  if(address == 'delhi' || address == 'hyderabad'){
-  db.query(query, (err, results) => {
-      if (err) {
-          res.status(500).send(err);
-          return;
-      }
-      res.json(results);
-      results.forEach(result => {
-          console.log(result);
-      });
-  });}else{
-    db.query(query,[address], (err, results) => {
-      if (err) {
-          res.status(500).send(err);
-          return;
-      }
-      res.json(results);
-      results.forEach(result => {
-          console.log(result);
-      });
-  });
-  }
+  const executeQuery = (query, params) => {
+    db.query(query, params, (err, results) => {
+        if (err) {
+            res.status(500).send(err);
+            return;
+        }
+        res.json(results);
+        results.forEach(result => {
+            console.log(result);
+        });
+    });
+};
+
+if (address === 'delhi' || address === 'hyderabad') {
+    executeQuery(query, []);
+} else {
+    executeQuery(query, [address]);
+}
 
 });
 app.get('/assigned', (req, res) => {
