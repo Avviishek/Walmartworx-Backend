@@ -441,12 +441,12 @@ app.post('/addbatch' , (req,res)=>{
   const randomStatus = statusOptions[Math.floor(Math.random() * statusOptions.length)];
   const query = 'INSERT INTO `TABLE 8` (`COL 1`, `COL 2`, `COL 3`,`COL 4`,`COL 5`,`COL 6` ) VALUES (?, ?, ?,?,?,?)';
   const values = [
-    batch["driver_name"],
-    batch["vehicle_reg_no"],
-    batch["mobile_no"],
-    batch["volume"],
+    batch[driver_name],
+    batch[vehicle_reg_no],
+    batch[mobile_no],
+    batch[volume],
     randomStatus,
-    batch["address"],
+    batch[address],
       
   ];
   db.query(query, values, (err, result) => {
