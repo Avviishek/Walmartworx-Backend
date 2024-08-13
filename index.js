@@ -66,16 +66,16 @@ app.get('/orders', (req, res) => {
       });
     }); 
     app.get('/searchorders', (req, res) => {
-      const orderId = req.query.orderId;
+      const {orderId} = req.query;
     
       let query = `
-        SELECT  
+        SELECT * 
         FROM \`TABLE 3\` 
       `;
     
       // If order_id is provided, add a WHERE clause to the query
       if (orderId) {
-        query += ` WHERE \`COL 1\` = ? LIMIT 1`;
+        query += ` WHERE \`COL 1\` = ? LIMIT 1 `;
       }
     
       db.query(query, [orderId], (err, results) => {
