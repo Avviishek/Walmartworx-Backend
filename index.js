@@ -69,7 +69,7 @@ app.get('/orders', (req, res) => {
       const orderId = req.query.order_id;
     
       let query = `
-        SELECT * 
+        SELECT  
         FROM \`TABLE 3\` 
       `;
     
