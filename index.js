@@ -437,7 +437,7 @@ app.post('/addbatch' , (req,res)=>{
   //     return res.status(400).send('Order data is required');
   // }
 
-  const statusOptions = ["Dispatched", "Not Dispatched"];
+  const statusOptions = ["Dispatched", "Pending"];
   const randomStatus = statusOptions[Math.floor(Math.random() * statusOptions.length)];
   const query = 'INSERT INTO `TABLE 8` (`COL 1`, `COL 2`, `COL 3`,`COL 4`,`COL 5`,`COL 6` ) VALUES (?, ?, ?,?,?,?)';
   
