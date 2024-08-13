@@ -205,7 +205,10 @@ app.get('/assignedorder', (req, res) => {
   } else if (address === 'hyderabad') {
     query = 'SELECT * FROM `TABLE 5`';
   } else {
-    query = 'SELECT * FROM `TABLE 3` WHERE `COL 2` = ?'
+    query = `SELECT * FROM \`TABLE 3\` WHERE \`COL 2\` = ? ORDER BY 
+    CAST(SUBSTRING(\`COL 7\`, 7, 4) AS UNSIGNED) * 10000 + 
+    CAST(SUBSTRING(\`COL 7\`, 4, 2) AS UNSIGNED) * 100 + 
+    CAST(SUBSTRING(\`COL 7\`, 1, 2) AS UNSIGNED) ASC`
   }
   const executeQuery = (query, params) => {
     db.query(query, params, (err, results) => {
