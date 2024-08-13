@@ -66,7 +66,7 @@ app.get('/orders', (req, res) => {
       });
     }); 
     app.get('/searchorders', (req, res) => {
-      const orderId = req.query.order_id;
+      const orderId = req.query.orderId;
     
       let query = `
         SELECT  
