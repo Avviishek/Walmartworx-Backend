@@ -471,10 +471,10 @@ db.query(query, [address], (err, results) => {
 app.get('/predictedSales' , (req,res)=>{
   const {address} = req.query; 
   let query ; 
-   if(address.toLowerCase() === 'guwahati'){
-    query = 'SELECT * FROM `TABLE 9`' ;
+   if(address.toLowerCase() === 'delhi'){
+    query = 'SELECT * FROM `TABLE 14`' ;
    }else{
-    query = 'SELECT * FROM `TABLE 10`' ;
+    query = 'SELECT * FROM `TABLE 15`' ;
    }
    //query = 'SELECT *FROM `TABLE 9`' ;
   db.query(query, (err, results) => {
