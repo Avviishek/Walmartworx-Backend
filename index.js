@@ -431,7 +431,7 @@ app.get('/batch' , (req,res)=>{
   });
 }) ;
 app.post('/addbatch' , (req,res)=>{
-  const batch = req.body;
+  const {driver_name ,vehicle_reg_no ,mobile_no, volume , address } = req.body;
 
   if (!batch || Object.keys(batch).length === 0) {
       return res.status(400).send('Order data is required');
@@ -440,16 +440,8 @@ app.post('/addbatch' , (req,res)=>{
   const statusOptions = ["Dispatched", "Not Yet Dispatched"];
   const randomStatus = statusOptions[Math.floor(Math.random() * statusOptions.length)];
   const query = 'INSERT INTO `TABLE 8` (`COL 1`, `COL 2`, `COL 3`,`COL 4`,`COL 5`,`COL 6` ) VALUES (?, ?, ?,?,?,?)';
-  const values = [
-    batch[driver_name],
-    batch[vehicle_reg_no],
-    batch[mobile_no],
-    batch[volume],
-    randomStatus,
-    batch[address],
-      
-  ];
-  db.query(query, values, (err, result) => {
+  
+  db.query(query, [driver_name ,vehicle_reg_no ,mobile_no, volume , randomStatus, address], (err, result) => {
     if (err) {
       res.status(500).send(err);
       return;
