@@ -480,9 +480,9 @@ app.get('/predictedSales' , (req,res)=>{
   const {address} = req.query; 
   let query ; 
    if(address.toLowerCase() === 'guwahati'){
-    query = 'SELECT * FROM `TABLE 11`' ;
+    query = 'SELECT * FROM `TABLE 9`' ;
    }else{
-    query = 'SELECT * FROM `TABLE 12`' ;
+    query = 'SELECT * FROM `TABLE 10`' ;
    }
    //query = 'SELECT *FROM `TABLE 9`' ;
   db.query(query, (err, results) => {
