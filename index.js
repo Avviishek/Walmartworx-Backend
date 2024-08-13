@@ -71,10 +71,6 @@ app.get('/orders', (req, res) => {
       let query = `
         SELECT * 
         FROM \`TABLE 3\` 
-        ORDER BY 
-          CAST(SUBSTRING(\`COL 7\`, 7, 4) AS UNSIGNED) * 10000 + 
-          CAST(SUBSTRING(\`COL 7\`, 4, 2) AS UNSIGNED) * 100 + 
-          CAST(SUBSTRING(\`COL 7\`, 1, 2) AS UNSIGNED) DESC
       `;
     
       // If order_id is provided, add a WHERE clause to the query
