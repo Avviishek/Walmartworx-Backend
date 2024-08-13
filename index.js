@@ -433,9 +433,9 @@ app.get('/batch' , (req,res)=>{
 app.post('/addbatch' , (req,res)=>{
   const {driver_name ,vehicle_reg_no ,mobile_no, volume , address } = req.body;
 
-  if (!batch || Object.keys(batch).length === 0) {
-      return res.status(400).send('Order data is required');
-  }
+  // if (!batch || Object.keys(batch).length === 0) {
+  //     return res.status(400).send('Order data is required');
+  // }
 
   const statusOptions = ["Dispatched", "Not Yet Dispatched"];
   const randomStatus = statusOptions[Math.floor(Math.random() * statusOptions.length)];
