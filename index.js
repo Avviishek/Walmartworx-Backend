@@ -75,7 +75,7 @@ app.get('/orders', (req, res) => {
     
       // If order_id is provided, add a WHERE clause to the query
       if (orderId) {
-        query += ` WHERE \`COL 1\` = ?`;
+        query += ` WHERE \`COL 1\` = ? LIMIT 1`;
       }
     
       db.query(query, [orderId], (err, results) => {
