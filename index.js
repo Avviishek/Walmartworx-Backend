@@ -7,7 +7,7 @@ const port = 3001;
 
 app.use(express.json());
 const corsOptions = {
-  origin: ['http://localhost:3000', 'https://warehouseworx.vercel.app/'], // Allow only these origins
+  origin: ['http://localhost:3000', 'https://warehouseworx.vercel.app'], // Allow only these origins
   methods: ['GET', 'POST', 'PUT', 'DELETE'], // Allowed methods
   credentials: true, // Allow credentials (cookies, authorization headers, etc.)
 };
